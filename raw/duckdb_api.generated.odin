@@ -119,8 +119,8 @@ duckdb_bit :: struct {
 }
 
 duckdb_bignum :: struct {
-    data:        ^c.uint8_t,
-    size:        idx_t,
+    data: ^c.uint8_t,
+    size: idx_t,
     is_negative: bool,
 }
 
@@ -192,26 +192,11 @@ duckdb_aggregate_init_t :: ^proc "c" (arg0: duckdb_function_info, arg1: duckdb_a
 
 duckdb_aggregate_destroy_t :: ^proc "c" (arg0: ^duckdb_aggregate_state, arg1: idx_t)
 
-duckdb_aggregate_update_t :: ^proc "c" (
-    arg0: duckdb_function_info,
-    arg1: duckdb_data_chunk,
-    arg2: ^duckdb_aggregate_state,
-)
+duckdb_aggregate_update_t :: ^proc "c" (arg0: duckdb_function_info, arg1: duckdb_data_chunk, arg2: ^duckdb_aggregate_state)
 
-duckdb_aggregate_combine_t :: ^proc "c" (
-    arg0: duckdb_function_info,
-    arg1: ^duckdb_aggregate_state,
-    arg2: ^duckdb_aggregate_state,
-    arg3: idx_t,
-)
+duckdb_aggregate_combine_t :: ^proc "c" (arg0: duckdb_function_info, arg1: ^duckdb_aggregate_state, arg2: ^duckdb_aggregate_state, arg3: idx_t)
 
-duckdb_aggregate_finalize_t :: ^proc "c" (
-    arg0: duckdb_function_info,
-    arg1: ^duckdb_aggregate_state,
-    arg2: duckdb_vector,
-    arg3: idx_t,
-    arg4: idx_t,
-)
+duckdb_aggregate_finalize_t :: ^proc "c" (arg0: duckdb_function_info, arg1: ^duckdb_aggregate_state, arg2: duckdb_vector, arg3: idx_t, arg4: idx_t)
 
 duckdb_copy_function :: ^struct {
     internal_ptr: rawptr,
@@ -245,12 +230,7 @@ duckdb_cast_function :: ^struct {
     internal_ptr: rawptr,
 }
 
-duckdb_cast_function_t :: ^proc "c" (
-    arg0: duckdb_function_info,
-    arg1: idx_t,
-    arg2: duckdb_vector,
-    arg3: duckdb_vector,
-) -> bool
+duckdb_cast_function_t :: ^proc "c" (arg0: duckdb_function_info, arg1: idx_t, arg2: duckdb_vector, arg3: duckdb_vector) -> bool
 
 duckdb_arrow_converted_schema :: ^struct {
     internal_ptr: rawptr,
@@ -284,18 +264,12 @@ duckdb_log_storage :: ^struct {
     internal_ptr: rawptr,
 }
 
-duckdb_logger_write_log_entry_t :: ^proc "c" (
-    arg0: rawptr,
-    arg1: ^duckdb_timestamp,
-    arg2: cstring,
-    arg3: cstring,
-    arg4: cstring,
-)
+duckdb_logger_write_log_entry_t :: ^proc "c" (arg0: rawptr, arg1: ^duckdb_timestamp, arg2: cstring, arg3: cstring, arg4: cstring)
 
 duckdb_extension_access :: struct {
-    set_error:    ^proc "c" (_: duckdb_extension_info, _: cstring),
-    get_database: ^proc "c" (_: duckdb_extension_info) -> ^duckdb_database,
-    get_api:      ^proc "c" (_: duckdb_extension_info, _: cstring) -> rawptr,
+    set_error: ^proc "c" (duckdb_extension_info, cstring),
+    get_database: ^proc "c" (duckdb_extension_info) -> ^duckdb_database,
+    get_api: ^proc "c" (duckdb_extension_info, cstring) -> rawptr,
 }
 
 @(default_calling_convention = "c", link_prefix = "duckdb_")

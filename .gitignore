@@ -4,3 +4,4 @@ header
 /build_shared*/
 /build_static*/
 /__pycache__/
+**/*_static*

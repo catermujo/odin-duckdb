@@ -17,7 +17,7 @@ if not exist "%SOURCE_DIR%" (
     git clone --revision 71f0c7a0bf10f60087b7bd42f524ae556c5a1967 --depth=1 --no-tags https://github.com/duckdb/duckdb.git "%SOURCE_DIR%" || exit /b 1
 )
 
-py -3 "%BASE%generate_bindings.py" || exit /b 1
+python "%BASE%generate_bindings.py" || exit /b 1
 if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
 
 echo Configuring static build...
