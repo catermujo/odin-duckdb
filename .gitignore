@@ -1,0 +1,6 @@
+header
+*.bin
+/duckdb/
+/build_shared*/
+/build_static*/
+/__pycache__/
